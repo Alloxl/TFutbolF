@@ -1,0 +1,54 @@
+/* Web sayfasının arka plan rengini siyah yapalım */
+body {
+  background-color: black;
+}
+
+/* Başlık elemanının yazı rengini beyaz yapalım */
+h1 {
+  color: white;
+}
+
+/* Paragraf elemanının yazı rengini gri yapalım */
+p {
+  color: gray;
+}
+
+/* Tuval elemanının arka plan rengini koyu gri yapalım */
+canvas {
+  background-color: gray;
+}
+
+/* Tuval elemanının kenarlığını beyaz yapalım */
+canvas {
+  border: 2px solid white;
+}
+
+/* Tuval elemanını web sayfasının ortasına yerleştirelim */
+canvas {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Buton elemanının rengini yeşil yapalım */
+button {
+  background-color: green;
+}
+
+/* Buton elemanının yazı rengini beyaz yapalım */
+button {
+  color: white;
+}
+
+/* Buton elemanının boyutunu büyütelim */
+button {
+  font-size: 20px;
+}
+
+/* Buton elemanını web sayfasının altına yerleştirelim */
+button {
+  display: block;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
