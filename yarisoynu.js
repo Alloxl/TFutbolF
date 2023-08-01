@@ -95,10 +95,6 @@ function oyunDongusu() {
     requestAnimationFrame(oyunDongusu);
   }
 }
-
-// Arabayı hareket ettirmek için bir fonksiyon tanımlayalım
-function arabaHareket() {
-  // Eğer sol ok tuşuna basılırsa
   
 // Arabayı hareket ettirmek için bir fonksiyon tanımlayalım
 function arabaHareket() {
@@ -127,7 +123,7 @@ function arabaHareket() {
   }
 }
 
-  // Arabayı çizmek için bir fonksiyon tanımlayalım
+// Arabayı çizmek için bir fonksiyon tanımlayalım
 function arabaCiz() {
   // Arabanın rengini ayarlayalım
   ctx.fillStyle = araba.renk;
@@ -135,23 +131,99 @@ function arabaCiz() {
   // Arabanın dikdörtgenini çizelim
   ctx.fillRect(araba.x, araba.y, araba.w, araba.h);
 }
-  
-  // Engelleri hareket ettirmek için bir fonksiyon tanımlayalım
+
+// Engelleri hareket ettirmek için bir fonksiyon tanımlayalım
 function engelHareket() {
+  // Eğer engeller dizisi boşsa veya son engelin y koordinatı belli bir değerden büyükse
+  if (engeller.length == 0 || engeller[engeller.length - 1].y > 100) {
+    // Yeni bir engel oluşturalım
+    var yeniEngel = {
+      x: Math.random() * (tuval.width - 50), // rastgele bir x koordinatı
+      y: -50, // y koordinatı tuvalin dışında olsun
+      w: 50, // genişlik
+      h: 50, // yükseklik
+      hiz: 3, // hareket hızı
+      renk: "blue" // renk
+    };
+
+    // Yeni engeli engeller dizisine ekleyelim
+    engeller.push(yeniEngel);
+  }
+
   // Engeller dizisindeki her bir engel için
   for (var i = 0; i < engeller.length; i++) {
-    // Engelin y koordinatını arttıralım
-    engeller[i].y += engeller[i].h;
+    // Engelin y koordinatını hız kadar arttıralım
+    engeller[i].y += engeller[i].hiz;
 
-    // Eğer engel tuvalin alt sınırından geçerse
+    // Eğer engel tuvalin dışına çıkarsa
     if (engeller[i].y > tuval.height) {
-      // Engeli diziden çıkartalım
+      // Engeli diziden çıkaralım
       engeller.splice(i, 1);
 
-      // Yeni bir engel oluşturalım
-      var yeniEngel = {
-        x: Math.floor(Math.random() * (tuval.width - 50)), // rastgele x koordinatı
-        y: -50, // y koordinatı
-        w: 50, // genişlik
-        h: 50, // yükseklik
-        renk:
+      // Dizi indeksini bir azaltalım
+      i--;
+    }
+  }
+}
+
+// Engelleri çizmek için bir fonksiyon tanımlayalım
+function engelCiz() {
+  // Engeller dizisindeki her bir engel için
+  for (var i = 0; i < engeller.length; i++) {
+    // Engelin rengini ayarlayalım
+    ctx.fillStyle = engeller[i].renk;
+
+    // Engelin dikdörtgenini çizelim
+    ctx.fillRect(engeller[i].x, engeller[i].y, engeller[i].w, engeller[i].h);
+  }
+}
+
+// Çarpışma kontrolü yapmak için bir fonksiyon tanımlayalım
+function carpismaKontrol() {
+  // Engeller dizisindeki her bir engel için
+  for (var i = 0; i < engeller.length; i++) {
+    // Arabanın ve engelin dikdörtgenlerinin kesişip kesişmediğini kontrol edelim
+    if (
+      araba.x < engeller[i].x + engeller[i].w &&
+      araba.x + araba.w > engeller[i].x &&
+      araba.y < engeller[i].y + engeller[i].h &&
+      araba.y + araba.h > engeller[i].y
+    ) {
+      // Oyun durumunu "bitti" olarak değiştirelim
+      oyunDurumu = "bitti";
+
+      // Oyun bitti mesajını yazdıralım
+      oyunBittiYazdir();
+    }
+  }
+}
+
+// Puanı artırmak için bir fonksiyon tanımlayalım
+function puanArtir() {
+  // Puanı her saniye bir arttıralım
+  puan += 1 / 60;
+}
+
+// Puanı yazdırmak için bir fonksiyon tanımlayalım
+function puanYazdir() {
+  // Yazının rengini siyah yapalım
+  ctx.fillStyle = "black";
+
+  // Yazının fontunu ayarlayalım
+  ctx.font = "20px Arial";
+
+  // Puanı tuvalin sol üst köşesine yazalım
+  ctx.fillText("Puan: " + Math.floor(puan), 10, 20);
+}
+
+// Oyun bitti mesajını yazdırmak için bir fonksiyon tanımlayalım
+function oyunBittiYazdir() {
+  // Yazının rengini kırmızı yapalım
+  ctx.fillStyle = "red";
+
+  // Yazının fontunu ayarlayalım
+  ctx.font = "40px Arial";
+
+  // Oyun bitti mesajını tuvalin ortasına yazalım
+  ctx.fillText("Oyun Bitti!", tuval.width / 2 - 100, tuval.height / 2);
+}
