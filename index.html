@@ -1,83 +1,53 @@
 <html>
 <head>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        .container {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-color: #f0f0f0;
-        }
-
-        .logo {
-            width: 300px;
-            height: 100px;
-            background-image: url("https://bitly.com/static/images/bitly-logo-text.png");
-            background-size: cover;
-        }
-
-        .title {
-            font-size: 36px;
-            font-weight: bold;
-            color: #333333;
-            margin-top: 20px;
-        }
-
-        .subtitle {
-            font-size: 18px;
-            color: #666666;
-            margin-top: 10px;
-        }
-
-        .form {
-            width: 500px;
-            height: 200px;
-            border-radius: 10px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .input {
-            width: 400px;
-            height: 50px;
-            border-radius: 25px;
-            border: none;
-            outline: none;
-            padding-left: 20px;
-        }
-
-        .button {
-            width: 200px;
-            height: 50px;
-            border-radius: 25px;
-            background-color: #ff9900;
-            border: none;
-            outline: none;
-            color:white; 
-        }
-    </style>
+    <title>Piksel Sanatı</title>
 </head>
 <body>
-    <div class="container">
-        <div class="logo"></div>
-        <div class="title">Bitly</div>
-        <div class="subtitle">Shorten, create and share trusted, powerful links</div>
-        <form class="form" action="shorten.php" method="post">
-          <input class="input" type="text" name="url" id="url" placeholder="Enter a link to shorten it">
-          <input class="button" type="submit" value="Shorten" name="submit">
-        </form>
-    </div>
+    <!-- Canvas elementi oluştur -->
+    <canvas id="canvas" width="80" height="80"></canvas>
+    <!-- JS kodunu çalıştır -->
+    <script>
+        // Canvas elementini seç
+        var canvas = document.getElementById("canvas");
+        // Canvas üzerinde çizim yapmak için bir context oluştur
+        var ctx = canvas.getContext("2d");
+        // Piksel boyutunu belirle (kaç piksel bir kare olacak)
+        var pixel_size = 10;
+        // Piksel renklerini belirle (RGB formatında)
+        var colors = [
+            "rgb(255, 0, 0)", // kırmızı
+            "rgb(0, 255, 0)", // yeşil
+            "rgb(0, 0, 255)", // mavi
+            "rgb(255, 255, 0)", // sarı
+            "rgb(255, 255, 255)", // beyaz
+            "rgb(0, 0, 0)" // siyah
+        ];
+        // Piksel desenini belirle (renklerin indisleriyle)
+        var pattern = [
+            [5, 5, 5, 5, 5, 5, 5, 5],
+            [5, 4, 4, 4, 4, 4, 4 ,5],
+            [5 ,4 ,3 ,3 ,3 ,3 ,4 ,5],
+            [5 ,4 ,3 ,2 ,2 ,3 ,4 ,5],
+            [5 ,4 ,3 ,2 ,1 ,3 ,4 ,5],
+            [5 ,4 ,3 ,3 ,3 ,3 ,4 ,5],
+            [5 ,4 ,4 ,4 ,4 ,4 ,4 ,5],
+            [5, 5, 5, 5, 5, 5, 5, 5]
+        ];
+        // Desendeki her satır için
+        for (var i = 0; i < pattern.length; i++) {
+            // Desendeki her sütun için
+            for (var j = 0; j < pattern[i].length; j++) {
+                // Desendeki renk indisini al
+                var color_index = pattern[i][j];
+                // Renk indisine karşılık gelen rengi al
+                var color = colors[color_index];
+                // Contextin rengini ayarla
+                ctx.fillStyle = color;
+                // Contexte bir kare çiz
+                ctx.fillRect(j * pixel_size, i * pixel_size, pixel_size, pixel_size);
+            }
+        }
+    </script>
 </body>
 </html>
+
