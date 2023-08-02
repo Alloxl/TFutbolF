@@ -1,8 +1,8 @@
-
+<!--
 		<div class="col-md-2 col-xs-12 marginBottom20"></div>
         <div class="socialindex col-md-4 col-xs-12 marginBottom20">
             <div class="socialindexTit">DISCORD</div>
-            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FEskisehirsporSKOfficial&amp;tabs=timeline&amp;width=486&amp;height=535&amp;small_header=true&amp;adapt_container_width=true&amp;hide_cover=false&amp;show_facepile=true&amp;appId=1199582510167327" width="100%" height="500" style="border:none;overflow:hidden;width:100%;" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+            <iframe src="https://discordapp.com/widget?id=1135536987810562098&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
         </div>
         <div class="socialindex col-md-4 col-xs-12 marginBottom20">
             <div class="socialindexTit">TWITTER</div>
@@ -17,3 +17,5 @@
                     }
                 }(document, "script", "twitter-wjs");</script>
         </div>
+
+-->
